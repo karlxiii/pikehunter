@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import FishManager from "./fish-manager";
-import Header from "./components/header";
+import Header from "@/app/components/header";
+import CatchesList from "./catches-list";
 
 const devMode = process.env.NEXT_PUBLIC_DEV_SKIP_AUTH === "true";
 
-export default async function Home() {
+export default async function CatchesPage() {
   if (!devMode) {
     const supabase = await createClient();
     const {
@@ -21,7 +21,8 @@ export default async function Home() {
     <>
       <Header />
       <main className="p-8">
-        <FishManager />
+        <h2 className="text-2xl font-bold mb-6">My Catches</h2>
+        <CatchesList />
       </main>
     </>
   );
