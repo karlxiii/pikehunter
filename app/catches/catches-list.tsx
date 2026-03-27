@@ -51,20 +51,20 @@ export default function CatchesList() {
   }
 
   if (loading) {
-    return <p className="text-gray-500">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
   }
 
   return (
     <div className="max-w-md space-y-4">
       {fishes.length === 0 ? (
-        <p className="text-gray-500">No catches yet.</p>
+        <p className="text-gray-500 dark:text-slate-400">No catches yet.</p>
       ) : (
         <ul className="space-y-2">
           {fishes.map((fish) => (
             <li
               key={fish.id}
               onClick={() => router.push(`/catches/${fish.id}`)}
-              className="border rounded p-3 cursor-pointer hover:bg-gray-50 active:bg-gray-100"
+              className="border dark:border-slate-600 rounded p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 active:bg-gray-100 dark:active:bg-slate-600"
             >
               {fish.image_url && (
                 <img
@@ -80,7 +80,7 @@ export default function CatchesList() {
                   {fish.length != null && <span>, {fish.length} cm</span>}
                 </div>
                 <svg
-                  className="w-4 h-4 text-gray-400 shrink-0"
+                  className="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -94,7 +94,7 @@ export default function CatchesList() {
                 </svg>
               </div>
               {fish.caught_at && (
-                <p className="text-sm text-gray-500 mt-1">{fish.caught_at}</p>
+                <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">{fish.caught_at}</p>
               )}
             </li>
           ))}

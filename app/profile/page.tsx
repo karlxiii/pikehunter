@@ -20,7 +20,7 @@ export default async function ProfilePage() {
       <Header />
       <main className="p-8 max-w-md">
         <h2 className="text-xl font-bold mb-4">My Profile</h2>
-        <p className="text-sm text-gray-500 mb-4">{email}</p>
+        <p className="text-sm text-gray-500 dark:text-slate-400 mb-4">{email}</p>
         <ProfileForm />
       </main>
     </>

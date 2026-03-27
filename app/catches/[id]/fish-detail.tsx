@@ -163,18 +163,18 @@ export default function FishDetail({ id }: { id: string }) {
   }
 
   if (loading) {
-    return <p className="text-gray-500 p-8">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400 p-8">Loading...</p>;
   }
 
   if (!fish) {
-    return <p className="text-gray-500 p-8">Fish not found.</p>;
+    return <p className="text-gray-500 dark:text-slate-400 p-8">Fish not found.</p>;
   }
 
   return (
     <div className="p-4 max-w-md mx-auto space-y-4">
       <button
         onClick={() => router.push("/catches")}
-        className="text-sm text-blue-600 hover:underline"
+        className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
       >
         ← Back to My Catches
       </button>
@@ -190,7 +190,7 @@ export default function FishDetail({ id }: { id: string }) {
       {editing ? (
         <div className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Species
             </label>
             <SpeciesInput
@@ -200,7 +200,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div className="flex gap-3">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-600">
+              <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
                 Weight (g)
               </label>
               <input
@@ -208,11 +208,11 @@ export default function FishDetail({ id }: { id: string }) {
                 onChange={(e) => setForm({ ...form, weight: e.target.value })}
                 type="number"
                 step="0.01"
-                className="w-full border rounded px-3 py-2"
+                className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-600">
+              <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
                 Length (cm)
               </label>
               <input
@@ -220,12 +220,12 @@ export default function FishDetail({ id }: { id: string }) {
                 onChange={(e) => setForm({ ...form, length: e.target.value })}
                 type="number"
                 step="0.1"
-                className="w-full border rounded px-3 py-2"
+                className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Location
             </label>
             <AutocompleteInput
@@ -243,18 +243,18 @@ export default function FishDetail({ id }: { id: string }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Date Caught
             </label>
             <input
               value={form.caught_at}
               onChange={(e) => setForm({ ...form, caught_at: e.target.value })}
               type="date"
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Depth (m)
             </label>
             <input
@@ -262,21 +262,21 @@ export default function FishDetail({ id }: { id: string }) {
               onChange={(e) => setForm({ ...form, depth: e.target.value })}
               type="number"
               step="0.1"
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Weather
             </label>
             <input
               value={form.weather}
               onChange={(e) => setForm({ ...form, weather: e.target.value })}
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Tackle
             </label>
             <AutocompleteInput
@@ -294,7 +294,7 @@ export default function FishDetail({ id }: { id: string }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
               Additional Info
             </label>
             <textarea
@@ -303,7 +303,7 @@ export default function FishDetail({ id }: { id: string }) {
                 setForm({ ...form, additional_info: e.target.value })
               }
               rows={3}
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div className="flex gap-3">
@@ -316,7 +316,7 @@ export default function FishDetail({ id }: { id: string }) {
             </button>
             <button
               onClick={() => setEditing(false)}
-              className="flex-1 border px-4 py-2 rounded hover:bg-gray-50"
+              className="flex-1 border dark:border-slate-600 px-4 py-2 rounded hover:bg-gray-50 dark:hover:bg-slate-700"
             >
               Cancel
             </button>
@@ -332,7 +332,7 @@ export default function FishDetail({ id }: { id: string }) {
       ) : (
         <div className="space-y-3">
           <div>
-            <span className="text-sm text-gray-500">Species</span>
+            <span className="text-sm text-gray-500 dark:text-slate-400">Species</span>
             <p className="text-lg font-semibold">
               {fish.species ?? "Unknown"}
             </p>
@@ -340,50 +340,50 @@ export default function FishDetail({ id }: { id: string }) {
           <div className="flex gap-6">
             {fish.weight != null && (
               <div>
-                <span className="text-sm text-gray-500">Weight</span>
+                <span className="text-sm text-gray-500 dark:text-slate-400">Weight</span>
                 <p>{fish.weight} g</p>
               </div>
             )}
             {fish.length != null && (
               <div>
-                <span className="text-sm text-gray-500">Length</span>
+                <span className="text-sm text-gray-500 dark:text-slate-400">Length</span>
                 <p>{fish.length} cm</p>
               </div>
             )}
           </div>
           {(fish.location || locationName) && (
             <div>
-              <span className="text-sm text-gray-500">Location</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">Location</span>
               <p>{locationName || fish.location}</p>
             </div>
           )}
           {fish.caught_at && (
             <div>
-              <span className="text-sm text-gray-500">Date Caught</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">Date Caught</span>
               <p>{fish.caught_at}</p>
             </div>
           )}
           {fish.depth != null && (
             <div>
-              <span className="text-sm text-gray-500">Depth</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">Depth</span>
               <p>{fish.depth} m</p>
             </div>
           )}
           {fish.weather && (
             <div>
-              <span className="text-sm text-gray-500">Weather</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">Weather</span>
               <p>{fish.weather}</p>
             </div>
           )}
           {tackleName && (
             <div>
-              <span className="text-sm text-gray-500">Tackle</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">Tackle</span>
               <p>{tackleName}</p>
             </div>
           )}
           {fish.additional_info && (
             <div>
-              <span className="text-sm text-gray-500">Additional Info</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">Additional Info</span>
               <p>{fish.additional_info}</p>
             </div>
           )}

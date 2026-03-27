@@ -19,11 +19,11 @@ export default function LocationList() {
   }, []);
 
   if (loading) {
-    return <p className="text-gray-500">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
   }
 
   if (locations.length === 0) {
-    return <p className="text-gray-500">No locations yet. Add a fish with a location to see it here.</p>;
+    return <p className="text-gray-500 dark:text-slate-400">No locations yet. Add a fish with a location to see it here.</p>;
   }
 
   return (
@@ -32,10 +32,10 @@ export default function LocationList() {
         <li
           key={location.value}
           onClick={() => router.push(`/locations/${encodeURIComponent(location.value)}`)}
-          className="flex items-center gap-3 px-4 py-3 border rounded bg-white cursor-pointer hover:bg-gray-50 active:bg-gray-100"
+          className="flex items-center gap-3 px-4 py-3 border dark:border-slate-600 rounded bg-white dark:bg-slate-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 active:bg-gray-100 dark:active:bg-slate-600"
         >
           <svg
-            className="w-5 h-5 text-gray-400 shrink-0"
+            className="w-5 h-5 text-gray-400 dark:text-slate-500 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ export default function LocationList() {
           </svg>
           <span className="flex-1">{location.label}</span>
           <svg
-            className="w-4 h-4 text-gray-400 shrink-0"
+            className="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

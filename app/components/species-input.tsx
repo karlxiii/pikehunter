@@ -61,15 +61,15 @@ export default function SpeciesInput({
         placeholder="Type to search..."
         autoComplete="off"
         required
-        className="w-full border rounded px-3 py-2"
+        className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
       />
       {open && filtered.length > 0 && (
-        <ul className="absolute z-10 w-full bg-white border rounded mt-1 max-h-48 overflow-y-auto shadow-lg">
+        <ul className="absolute z-10 w-full bg-white dark:bg-slate-800 border dark:border-slate-600 rounded mt-1 max-h-48 overflow-y-auto shadow-lg">
           {filtered.map((s) => (
             <li
               key={s}
               onClick={() => handleSelect(s)}
-              className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+              className="px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700"
             >
               {s}
             </li>

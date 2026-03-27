@@ -49,26 +49,26 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
   }
 
   if (loading) {
-    return <p className="text-gray-500">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
   }
 
   return (
     <div className="space-y-6">
       <button
         onClick={() => router.push("/locations")}
-        className="text-sm text-blue-600 hover:underline"
+        className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
       >
         ← Back to Locations
       </button>
 
-      <div className="space-y-3 border rounded p-4 bg-white">
+      <div className="space-y-3 border dark:border-slate-600 rounded p-4 bg-white dark:bg-slate-800">
         <h2 className="text-lg font-bold">Location Info</h2>
         <div>
           <label className="block text-sm font-medium">Name</label>
           <input
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
           />
         </div>
         <button
@@ -90,14 +90,14 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
           Catches ({fishes.length})
         </h3>
         {fishes.length === 0 ? (
-          <p className="text-gray-500">No catches at this location.</p>
+          <p className="text-gray-500 dark:text-slate-400">No catches at this location.</p>
         ) : (
           <ul className="space-y-2">
             {fishes.map((fish) => (
               <li
                 key={fish.id}
                 onClick={() => router.push(`/catches/${fish.id}`)}
-                className="border rounded p-3 cursor-pointer hover:bg-gray-50 active:bg-gray-100"
+                className="border dark:border-slate-600 rounded p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 active:bg-gray-100 dark:active:bg-slate-600"
               >
                 {fish.image_url && (
                   <img
@@ -113,7 +113,7 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
                     {fish.length != null && <span>, {fish.length} cm</span>}
                   </div>
                   <svg
-                    className="w-4 h-4 text-gray-400 shrink-0"
+                    className="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -127,7 +127,7 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
                   </svg>
                 </div>
                 {fish.caught_at && (
-                  <p className="text-sm text-gray-500 mt-1">{fish.caught_at}</p>
+                  <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">{fish.caught_at}</p>
                 )}
               </li>
             ))}

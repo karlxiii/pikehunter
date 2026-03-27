@@ -52,20 +52,20 @@ export default function TackleList() {
   }
 
   if (loading) {
-    return <p className="text-gray-500">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
   }
 
   return (
     <div className="space-y-4">
       {showForm ? (
-        <div className="space-y-3 border rounded p-4 bg-white">
+        <div className="space-y-3 border dark:border-slate-600 rounded p-4 bg-white dark:bg-slate-800">
           <h3 className="text-lg font-bold">Add Tackle</h3>
           <div>
             <label className="block text-sm font-medium">Name</label>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
@@ -75,7 +75,7 @@ export default function TackleList() {
               onChange={(e) => setForm({ ...form, weight: e.target.value })}
               type="number"
               step="0.1"
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
@@ -83,7 +83,7 @@ export default function TackleList() {
             <input
               value={form.colour}
               onChange={(e) => setForm({ ...form, colour: e.target.value })}
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
@@ -105,7 +105,7 @@ export default function TackleList() {
             </button>
             <button
               onClick={() => { setShowForm(false); setMessage(""); }}
-              className="flex-1 border px-4 py-2 rounded hover:bg-gray-50"
+              className="flex-1 border dark:border-slate-600 px-4 py-2 rounded hover:bg-gray-50 dark:hover:bg-slate-700"
             >
               Cancel
             </button>
@@ -124,17 +124,17 @@ export default function TackleList() {
       )}
 
       {tackles.length === 0 && !showForm ? (
-        <p className="text-gray-500">No tackles yet.</p>
+        <p className="text-gray-500 dark:text-slate-400">No tackles yet.</p>
       ) : (
         <ul className="space-y-2">
           {tackles.map((tackle) => (
         <li
           key={tackle.value}
           onClick={() => router.push(`/tacklebox/${encodeURIComponent(tackle.value)}`)}
-          className="flex items-center gap-3 px-4 py-3 border rounded bg-white cursor-pointer hover:bg-gray-50 active:bg-gray-100"
+          className="flex items-center gap-3 px-4 py-3 border dark:border-slate-600 rounded bg-white dark:bg-slate-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 active:bg-gray-100 dark:active:bg-slate-600"
         >
           <svg
-            className="w-5 h-5 text-gray-400 shrink-0"
+            className="w-5 h-5 text-gray-400 dark:text-slate-500 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -149,7 +149,7 @@ export default function TackleList() {
           </svg>
           <span className="flex-1">{tackle.label}</span>
           <svg
-            className="w-4 h-4 text-gray-400 shrink-0"
+            className="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

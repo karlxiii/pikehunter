@@ -17,11 +17,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex items-center justify-between px-4 py-3 border-b">
+      <header className="flex items-center justify-between px-4 py-3 border-b dark:border-slate-600">
         <button
           onClick={() => setSidebarOpen(true)}
           aria-label="Open menu"
-          className="p-2 hover:bg-gray-100 rounded"
+          className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded"
         >
           <svg
             className="w-6 h-6"
@@ -41,7 +41,7 @@ export default function Header() {
         <a
           href="/profile"
           aria-label="Profile"
-          className="p-2 hover:bg-gray-100 rounded"
+          className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded"
         >
           {avatarUrl ? (
             <img
@@ -77,16 +77,16 @@ export default function Header() {
 
       {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full w-64 bg-white border-r z-50 transform transition-transform duration-200 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-800 border-r dark:border-slate-600 z-50 transform transition-transform duration-200 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b">
+        <div className="flex items-center justify-between px-4 py-3 border-b dark:border-slate-600">
           <span className="text-lg font-bold">Menu</span>
           <button
             onClick={() => setSidebarOpen(false)}
             aria-label="Close menu"
-            className="p-2 hover:bg-gray-100 rounded"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded"
           >
             <svg
               className="w-5 h-5"
@@ -108,7 +108,7 @@ export default function Header() {
             <a
               href="/"
               onClick={() => setSidebarOpen(false)}
-              className="block px-3 py-2 rounded hover:bg-gray-100"
+              className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
               Home
             </a>
@@ -117,7 +117,7 @@ export default function Header() {
             <a
               href="/catches"
               onClick={() => setSidebarOpen(false)}
-              className="block px-3 py-2 rounded hover:bg-gray-100"
+              className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
               My Catches
             </a>
@@ -126,7 +126,7 @@ export default function Header() {
             <a
               href="/tacklebox"
               onClick={() => setSidebarOpen(false)}
-              className="block px-3 py-2 rounded hover:bg-gray-100"
+              className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
               Tacklebox
             </a>
@@ -135,18 +135,18 @@ export default function Header() {
             <a
               href="/locations"
               onClick={() => setSidebarOpen(false)}
-              className="block px-3 py-2 rounded hover:bg-gray-100"
+              className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
               Locations
             </a>
           </li>
         </ul>
-        <div className="absolute bottom-0 w-full p-4 border-t">
+        <div className="absolute bottom-0 w-full p-4 border-t dark:border-slate-600">
           <button
             onClick={async () => {
               await signOut();
             }}
-            className="text-sm text-gray-500 underline hover:text-gray-700"
+            className="text-sm text-gray-500 dark:text-slate-400 underline hover:text-gray-700 dark:hover:text-slate-300"
           >
             Sign Out
           </button>

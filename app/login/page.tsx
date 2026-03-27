@@ -65,7 +65,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <div>
@@ -79,7 +79,7 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full border rounded px-3 py-2"
+              className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
             />
           </div>
           <button
@@ -106,7 +106,7 @@ export default function LoginPage() {
               setError("");
               setMessage("");
             }}
-            className="text-blue-600 underline"
+            className="text-blue-600 dark:text-blue-400 underline"
           >
             {isSignUp ? "Sign In" : "Sign Up"}
           </button>

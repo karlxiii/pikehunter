@@ -54,7 +54,7 @@ export default function ProfileForm() {
   }
 
   if (loading) {
-    return <p className="text-gray-500">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
   }
 
   const displayedImage = avatarPreview ?? avatarUrl;
@@ -69,8 +69,8 @@ export default function ProfileForm() {
             className="w-24 h-24 rounded-full object-cover border"
           />
         ) : (
-          <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
-            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-24 h-24 rounded-full bg-gray-200 dark:bg-slate-600 flex items-center justify-center">
+            <svg className="w-10 h-10 text-gray-400 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
@@ -78,9 +78,9 @@ export default function ProfileForm() {
         <div className="flex gap-2">
           <label
             htmlFor="avatar"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border rounded cursor-pointer hover:bg-gray-200 text-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-slate-700 border dark:border-slate-600 rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-600 text-sm"
           >
-            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-gray-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             Change photo
@@ -96,7 +96,7 @@ export default function ProfileForm() {
                   if (fileInputRef.current) fileInputRef.current.value = "";
                 }
               }}
-              className="inline-flex items-center px-3 py-2 bg-gray-100 border rounded hover:bg-red-50 hover:border-red-300 text-sm"
+              className="inline-flex items-center px-3 py-2 bg-gray-100 dark:bg-slate-700 border dark:border-slate-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 hover:border-red-300 dark:hover:border-red-700 text-sm"
               aria-label="Remove photo"
             >
               <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@ export default function ProfileForm() {
           type="text"
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
         />
       </div>
       <div>
@@ -138,7 +138,7 @@ export default function ProfileForm() {
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
         />
       </div>
       <div>
@@ -151,7 +151,7 @@ export default function ProfileForm() {
           rows={3}
           value={bio}
           onChange={(e) => setBio(e.target.value)}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
         />
       </div>
       <button
