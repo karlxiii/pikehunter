@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getFishesByLocation, getLocationInfo, updateLocationInfo } from "@/app/actions";
+import { useT } from "@/lib/i18n";
 
 type Fish = {
   id: string;
@@ -15,6 +16,7 @@ type Fish = {
 
 export default function LocationFishes({ locationId }: { locationId: string }) {
   const router = useRouter();
+  const { t } = useT();
   const [fishes, setFishes] = useState<Fish[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -41,7 +43,7 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
       name: form.name || undefined,
     });
     if (result.success) {
-      setMessage("Saved!");
+      setMessage(t("common.saved"));
     } else {
       setMessage(`Error: ${result.error}`);
     }
@@ -49,7 +51,7 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
   }
 
   if (loading) {
-    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">{t("common.loading")}</p>;
   }
 
   return (
@@ -58,13 +60,13 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
         onClick={() => router.push("/locations")}
         className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
       >
-        ← Back to Locations
+        {t("locations.backToLocations")}
       </button>
 
       <div className="space-y-3 border dark:border-slate-600 rounded p-4 bg-white dark:bg-slate-800">
-        <h2 className="text-lg font-bold">Location Info</h2>
+        <h2 className="text-lg font-bold">{t("locations.info")}</h2>
         <div>
-          <label className="block text-sm font-medium">Name</label>
+          <label className="block text-sm font-medium">{t("common.name")}</label>
           <input
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -76,7 +78,7 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
           disabled={saving}
           className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
         >
-          {saving ? "Saving..." : "Save"}
+          {saving ? t("common.saving") : t("common.save")}
         </button>
         {message && (
           <p className={message.startsWith("Error") ? "text-red-600" : "text-green-600"}>
@@ -87,10 +89,10 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
 
       <div className="space-y-3">
         <h3 className="text-lg font-bold">
-          Catches ({fishes.length})
+          {t("catches.count")} ({fishes.length})
         </h3>
         {fishes.length === 0 ? (
-          <p className="text-gray-500 dark:text-slate-400">No catches at this location.</p>
+          <p className="text-gray-500 dark:text-slate-400">{t("locations.noCatches")}</p>
         ) : (
           <ul className="space-y-2">
             {fishes.map((fish) => (
@@ -108,7 +110,7 @@ export default function LocationFishes({ locationId }: { locationId: string }) {
                 )}
                 <div className="flex items-center justify-between">
                   <div>
-                    <strong>{fish.species ?? "Unknown species"}</strong>
+                    <strong>{fish.species ?? t("fish.unknownSpecies")}</strong>
                     {fish.weight != null && <span> — {fish.weight} g</span>}
                     {fish.length != null && <span>, {fish.length} cm</span>}
                   </div>

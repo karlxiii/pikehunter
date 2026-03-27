@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getTackles, createTackle, getTackleTypes } from "@/app/actions";
 import AutocompleteInput from "@/app/components/autocomplete-input";
+import { useT } from "@/lib/i18n";
 
 export default function TackleList() {
   const router = useRouter();
+  const { t } = useT();
   const [tackles, setTackles] = useState<{ label: string; value: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -52,16 +54,17 @@ export default function TackleList() {
   }
 
   if (loading) {
-    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">{t("common.loading")}</p>;
   }
 
   return (
     <div className="space-y-4">
+      <h2 className="text-xl font-bold">{t("tacklebox.title")}</h2>
       {showForm ? (
         <div className="space-y-3 border dark:border-slate-600 rounded p-4 bg-white dark:bg-slate-800">
-          <h3 className="text-lg font-bold">Add Tackle</h3>
+          <h3 className="text-lg font-bold">{t("tacklebox.addTackle")}</h3>
           <div>
-            <label className="block text-sm font-medium">Name</label>
+            <label className="block text-sm font-medium">{t("common.name")}</label>
             <input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -69,7 +72,7 @@ export default function TackleList() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium">Weight (g)</label>
+            <label className="block text-sm font-medium">{t("fish.weightUnit")}</label>
             <input
               value={form.weight}
               onChange={(e) => setForm({ ...form, weight: e.target.value })}
@@ -79,7 +82,7 @@ export default function TackleList() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium">Colour</label>
+            <label className="block text-sm font-medium">{t("tacklebox.colour")}</label>
             <input
               value={form.colour}
               onChange={(e) => setForm({ ...form, colour: e.target.value })}
@@ -87,12 +90,11 @@ export default function TackleList() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium">Type</label>
+            <label className="block text-sm font-medium">{t("common.type")}</label>
             <AutocompleteInput
               value={form.type}
               onChange={(val) => setForm({ ...form, type: val })}
               suggestions={tackleTypes}
-              placeholder="Type to search..."
             />
           </div>
           <div className="flex gap-3">
@@ -101,13 +103,13 @@ export default function TackleList() {
               disabled={saving || !form.name.trim()}
               className="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
             >
-              {saving ? "Adding..." : "Add"}
+              {saving ? t("tacklebox.adding") : t("common.add")}
             </button>
             <button
               onClick={() => { setShowForm(false); setMessage(""); }}
               className="flex-1 border dark:border-slate-600 px-4 py-2 rounded hover:bg-gray-50 dark:hover:bg-slate-700"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
           </div>
           {message && (
@@ -119,12 +121,12 @@ export default function TackleList() {
           onClick={() => setShowForm(true)}
           className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          Add Tackle
+          {t("tacklebox.addTackle")}
         </button>
       )}
 
       {tackles.length === 0 && !showForm ? (
-        <p className="text-gray-500 dark:text-slate-400">No tackles yet.</p>
+        <p className="text-gray-500 dark:text-slate-400">{t("tacklebox.noTackles")}</p>
       ) : (
         <ul className="space-y-2">
           {tackles.map((tackle) => (

@@ -5,8 +5,7 @@ export default async function TackleboxPage() {
   return (
     <>
       <Header />
-      <main className="p-8 max-w-md">
-        <h2 className="text-xl font-bold mb-4">Tacklebox</h2>
+      <main className="p-8 max-w-2xl mx-auto w-full">
         <TackleList />
       </main>
     </>

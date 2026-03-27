@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useT } from "@/lib/i18n";
 
 export type SuggestionItem = string | { label: string; value: string; displayValue?: string };
 
@@ -24,7 +25,7 @@ export default function AutocompleteInput({
   onChange,
   onSelect,
   suggestions,
-  placeholder = "Type to search...",
+  placeholder,
 }: {
   name?: string;
   defaultValue?: string;
@@ -34,6 +35,8 @@ export default function AutocompleteInput({
   suggestions: SuggestionItem[];
   placeholder?: string;
 }) {
+  const { t } = useT();
+  const resolvedPlaceholder = placeholder ?? t("common.searchPlaceholder");
   const [input, setInput] = useState(value ?? defaultValue ?? "");
   const [open, setOpen] = useState(false);
   const [filtered, setFiltered] = useState<SuggestionItem[]>([]);
@@ -84,7 +87,7 @@ export default function AutocompleteInput({
         type="text"
         value={input}
         onChange={(e) => handleChange(e.target.value)}
-        placeholder={placeholder}
+        placeholder={resolvedPlaceholder}
         autoComplete="off"
         className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"
       />

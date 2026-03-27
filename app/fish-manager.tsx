@@ -4,8 +4,10 @@ import { useActionState, useEffect, useState } from "react";
 import { createFish, getTackles, getLocations } from "./actions";
 import SpeciesInput from "./components/species-input";
 import AutocompleteInput from "./components/autocomplete-input";
+import { useT } from "@/lib/i18n";
 
 export default function FishManager() {
+  const { t } = useT();
   const [state, formAction, isPending] = useActionState(createFish, {
     message: "",
     success: false,
@@ -27,19 +29,19 @@ export default function FishManager() {
   }, []);
 
   return (
-    <div className="space-y-8 max-w-md">
+    <div className="space-y-8 max-w-md mx-auto">
       <section>
-        <h2 className="text-xl font-bold mb-4">Add a Fish</h2>
+        <h2 className="text-xl font-bold mb-4">{t("fish.addTitle")}</h2>
         <form action={formAction} className="space-y-3">
           <div>
             <label htmlFor="species" className="block text-sm font-medium">
-              Species
+              {t("fish.species")}
             </label>
             <SpeciesInput name="species" onChange={(val) => setSpeciesValue(val)} />
           </div>
           <div>
             <label htmlFor="weight" className="block text-sm font-medium">
-              Weight (g)
+              {t("fish.weightUnit")}
             </label>
             <input
               id="weight"
@@ -51,7 +53,7 @@ export default function FishManager() {
           </div>
           <div>
             <label htmlFor="length" className="block text-sm font-medium">
-              Length (cm)
+              {t("fish.lengthUnit")}
             </label>
             <input
               id="length"
@@ -63,7 +65,7 @@ export default function FishManager() {
           </div>
           <div>
             <label htmlFor="caught_at" className="block text-sm font-medium">
-              Date Caught
+              {t("fish.dateCaught")}
             </label>
             <input
               id="caught_at"
@@ -86,19 +88,18 @@ export default function FishManager() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            More details
+            {t("fish.moreDetails")}
           </button>
           {showMore && (
             <div className="space-y-3">
               <div>
                 <label htmlFor="location" className="block text-sm font-medium">
-                  Location
+                  {t("fish.location")}
                 </label>
                 <input type="hidden" name="location_id" value={selectedLocationId} />
                 <AutocompleteInput
                   name="location"
                   suggestions={locations}
-                  placeholder="Type to search..."
                   onChange={() => setSelectedLocationId("")}
                   onSelect={(item) => {
                     if (typeof item !== "string") {
@@ -109,13 +110,12 @@ export default function FishManager() {
               </div>
               <div>
                 <label htmlFor="tackle" className="block text-sm font-medium">
-                  Tackle
+                  {t("fish.tackle")}
                 </label>
                 <input type="hidden" name="tackle_id" value={selectedTackleId} />
                 <AutocompleteInput
                   name="tackle"
                   suggestions={tackles}
-                  placeholder="Type to search..."
                   onChange={() => setSelectedTackleId("")}
                   onSelect={(item) => {
                     if (typeof item !== "string") {
@@ -126,7 +126,7 @@ export default function FishManager() {
               </div>
               <div>
                 <label htmlFor="depth" className="block text-sm font-medium">
-                  Depth (m)
+                  {t("fish.depthUnit")}
                 </label>
                 <input
                   id="depth"
@@ -138,7 +138,7 @@ export default function FishManager() {
               </div>
               <div>
                 <label htmlFor="weather" className="block text-sm font-medium">
-                  Weather
+                  {t("fish.weather")}
                 </label>
                 <input
                   id="weather"
@@ -149,7 +149,7 @@ export default function FishManager() {
               </div>
               <div>
                 <label htmlFor="additional_info" className="block text-sm font-medium">
-                  Additional Info
+                  {t("fish.additionalInfo")}
                 </label>
                 <textarea
                   id="additional_info"
@@ -179,7 +179,7 @@ export default function FishManager() {
                     d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                   />
                 </svg>
-                <span className="text-sm">Upload photo</span>
+                <span className="text-sm">{t("fish.uploadPhoto")}</span>
               </label>
               <input
                 id="image"
@@ -194,7 +194,7 @@ export default function FishManager() {
               disabled={isPending || !speciesValue.trim()}
               className="w-full flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
             >
-              {isPending ? "Adding..." : "Add Fish"}
+              {isPending ? t("fish.adding") : t("fish.addFish")}
             </button>
           </div>
           {state.message && (

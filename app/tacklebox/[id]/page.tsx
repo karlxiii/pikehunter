@@ -11,7 +11,7 @@ export default async function TackleDetailPage({
   return (
     <>
       <Header />
-      <main className="p-8 max-w-md">
+      <main className="p-8 max-w-2xl mx-auto w-full">
         <TackleFishes tackleId={id} />
       </main>
     </>

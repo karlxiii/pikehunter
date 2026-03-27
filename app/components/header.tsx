@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { signOut, getProfile } from "@/app/actions";
+import { useT } from "@/lib/i18n";
 
 export default function Header() {
+  const { t } = useT();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
@@ -37,7 +39,7 @@ export default function Header() {
             />
           </svg>
         </button>
-        <h1 className="text-xl font-bold">PikeHunter 🐟</h1>
+        <h1 className="text-xl font-bold">{t("app.title")}</h1>
         <a
           href="/profile"
           aria-label="Profile"
@@ -82,7 +84,7 @@ export default function Header() {
         }`}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b dark:border-slate-600">
-          <span className="text-lg font-bold">Menu</span>
+          <span className="text-lg font-bold">{t("nav.menu")}</span>
           <button
             onClick={() => setSidebarOpen(false)}
             aria-label="Close menu"
@@ -110,7 +112,7 @@ export default function Header() {
               onClick={() => setSidebarOpen(false)}
               className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
-              Home
+              {t("nav.home")}
             </a>
           </li>
           <li>
@@ -119,7 +121,7 @@ export default function Header() {
               onClick={() => setSidebarOpen(false)}
               className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
-              My Catches
+              {t("nav.catches")}
             </a>
           </li>
           <li>
@@ -128,7 +130,7 @@ export default function Header() {
               onClick={() => setSidebarOpen(false)}
               className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
-              Tacklebox
+              {t("nav.tacklebox")}
             </a>
           </li>
           <li>
@@ -137,7 +139,7 @@ export default function Header() {
               onClick={() => setSidebarOpen(false)}
               className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700"
             >
-              Locations
+              {t("nav.locations")}
             </a>
           </li>
         </ul>
@@ -148,7 +150,7 @@ export default function Header() {
             }}
             className="text-sm text-gray-500 dark:text-slate-400 underline hover:text-gray-700 dark:hover:text-slate-300"
           >
-            Sign Out
+            {t("nav.signOut")}
           </button>
         </div>
       </nav>

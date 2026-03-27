@@ -11,7 +11,7 @@ export default async function LocationDetailPage({
   return (
     <>
       <Header />
-      <main className="p-8 max-w-md">
+      <main className="p-8 max-w-2xl mx-auto w-full">
         <LocationFishes locationId={id} />
       </main>
     </>

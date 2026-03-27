@@ -3,8 +3,10 @@
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useT } from "@/lib/i18n";
 
 export default function LoginPage() {
+  const { t } = useT();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
@@ -26,7 +28,7 @@ export default function LoginPage() {
       if (error) {
         setError(error.message);
       } else {
-        setMessage("Check your email to confirm your account.");
+        setMessage(t("login.checkEmail"));
       }
     } else {
       const { error } = await supabase.auth.signInWithPassword({
@@ -48,16 +50,16 @@ export default function LoginPage() {
     <main className="flex min-h-full items-center justify-center p-8">
       <div className="w-full max-w-sm space-y-6">
         <h1 className="text-3xl font-bold text-center">
-          PikeHunter 🐟
+          {t("app.title")}
         </h1>
         <h2 className="text-xl text-center">
-          {isSignUp ? "Create Account" : "Sign In"}
+          {isSignUp ? t("login.createAccount") : t("login.signIn")}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium">
-              Email
+              {t("login.email")}
             </label>
             <input
               id="email"
@@ -70,7 +72,7 @@ export default function LoginPage() {
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium">
-              Password
+              {t("login.password")}
             </label>
             <input
               id="password"
@@ -88,10 +90,10 @@ export default function LoginPage() {
             className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
           >
             {loading
-              ? "Loading..."
+              ? t("common.loading")
               : isSignUp
-                ? "Sign Up"
-                : "Sign In"}
+                ? t("login.signUp")
+                : t("login.signIn")}
           </button>
         </form>
 
@@ -99,7 +101,7 @@ export default function LoginPage() {
         {message && <p className="text-green-600 text-sm">{message}</p>}
 
         <p className="text-center text-sm">
-          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+          {isSignUp ? t("login.hasAccount") : t("login.noAccount")}{" "}
           <button
             onClick={() => {
               setIsSignUp(!isSignUp);
@@ -108,7 +110,7 @@ export default function LoginPage() {
             }}
             className="text-blue-600 dark:text-blue-400 underline"
           >
-            {isSignUp ? "Sign In" : "Sign Up"}
+            {isSignUp ? t("login.signIn") : t("login.signUp")}
           </button>
         </p>
       </div>

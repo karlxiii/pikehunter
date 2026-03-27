@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="p-8">
+      <main className="p-8 max-w-2xl mx-auto w-full">
         <FishManager />
       </main>
     </>

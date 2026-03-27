@@ -6,6 +6,7 @@ import { getFish, updateFish, deleteFish, getTackles, getTackleInfo, getLocation
 import SpeciesInput from "@/app/components/species-input";
 import AutocompleteInput from "@/app/components/autocomplete-input";
 import { useConfirm } from "@/app/components/confirm-modal";
+import { useT } from "@/lib/i18n";
 
 type Fish = {
   id: string;
@@ -26,6 +27,7 @@ type Fish = {
 export default function FishDetail({ id }: { id: string }) {
   const router = useRouter();
   const { confirm, modal } = useConfirm();
+  const { t } = useT();
   const [fish, setFish] = useState<Fish | null>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -107,9 +109,9 @@ export default function FishDetail({ id }: { id: string }) {
 
   async function handleDelete() {
     const ok = await confirm({
-      title: "Delete catch",
-      message: "Are you sure you want to delete this catch? This cannot be undone.",
-      confirmLabel: "Delete",
+      title: t("catches.deleteTitle"),
+      message: t("catches.deleteMessage"),
+      confirmLabel: t("common.delete"),
       destructive: true,
     });
     if (!ok) return;
@@ -163,11 +165,11 @@ export default function FishDetail({ id }: { id: string }) {
   }
 
   if (loading) {
-    return <p className="text-gray-500 dark:text-slate-400 p-8">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400 p-8">{t("common.loading")}</p>;
   }
 
   if (!fish) {
-    return <p className="text-gray-500 dark:text-slate-400 p-8">Fish not found.</p>;
+    return <p className="text-gray-500 dark:text-slate-400 p-8">{t("fish.notFound")}</p>;
   }
 
   return (
@@ -176,7 +178,7 @@ export default function FishDetail({ id }: { id: string }) {
         onClick={() => router.push("/catches")}
         className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
       >
-        ← Back to My Catches
+        {t("catches.backToCatches")}
       </button>
 
       {fish.image_url && (
@@ -191,7 +193,7 @@ export default function FishDetail({ id }: { id: string }) {
         <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Species
+              {t("fish.species")}
             </label>
             <SpeciesInput
               value={form.species}
@@ -201,7 +203,7 @@ export default function FishDetail({ id }: { id: string }) {
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-                Weight (g)
+                {t("fish.weightUnit")}
               </label>
               <input
                 value={form.weight}
@@ -213,7 +215,7 @@ export default function FishDetail({ id }: { id: string }) {
             </div>
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-                Length (cm)
+                {t("fish.lengthUnit")}
               </label>
               <input
                 value={form.length}
@@ -226,7 +228,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Location
+              {t("fish.location")}
             </label>
             <AutocompleteInput
               value={form.location}
@@ -244,7 +246,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Date Caught
+              {t("fish.dateCaught")}
             </label>
             <input
               value={form.caught_at}
@@ -255,7 +257,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Depth (m)
+              {t("fish.depthUnit")}
             </label>
             <input
               value={form.depth}
@@ -267,7 +269,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Weather
+              {t("fish.weather")}
             </label>
             <input
               value={form.weather}
@@ -277,7 +279,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Tackle
+              {t("fish.tackle")}
             </label>
             <AutocompleteInput
               value={form.tackle_display}
@@ -295,7 +297,7 @@ export default function FishDetail({ id }: { id: string }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-slate-300">
-              Additional Info
+              {t("fish.additionalInfo")}
             </label>
             <textarea
               value={form.additional_info}
@@ -312,13 +314,13 @@ export default function FishDetail({ id }: { id: string }) {
               disabled={deleting}
               className="flex-1 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 disabled:opacity-50"
             >
-              {deleting ? "Deleting..." : "Delete"}
+              {deleting ? t("common.deleting") : t("common.delete")}
             </button>
             <button
               onClick={() => setEditing(false)}
               className="flex-1 border dark:border-slate-600 px-4 py-2 rounded hover:bg-gray-50 dark:hover:bg-slate-700"
             >
-              Cancel
+              {t("common.cancel")}
             </button>
           </div>
           <button
@@ -326,64 +328,64 @@ export default function FishDetail({ id }: { id: string }) {
             disabled={saving}
             className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
           >
-            {saving ? "Saving..." : "Save"}
+            {saving ? t("common.saving") : t("common.save")}
           </button>
         </div>
       ) : (
         <div className="space-y-3">
           <div>
-            <span className="text-sm text-gray-500 dark:text-slate-400">Species</span>
+            <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.species")}</span>
             <p className="text-lg font-semibold">
-              {fish.species ?? "Unknown"}
+              {fish.species ?? t("fish.unknown")}
             </p>
           </div>
           <div className="flex gap-6">
             {fish.weight != null && (
               <div>
-                <span className="text-sm text-gray-500 dark:text-slate-400">Weight</span>
+                <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.weight")}</span>
                 <p>{fish.weight} g</p>
               </div>
             )}
             {fish.length != null && (
               <div>
-                <span className="text-sm text-gray-500 dark:text-slate-400">Length</span>
+                <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.length")}</span>
                 <p>{fish.length} cm</p>
               </div>
             )}
           </div>
           {(fish.location || locationName) && (
             <div>
-              <span className="text-sm text-gray-500 dark:text-slate-400">Location</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.location")}</span>
               <p>{locationName || fish.location}</p>
             </div>
           )}
           {fish.caught_at && (
             <div>
-              <span className="text-sm text-gray-500 dark:text-slate-400">Date Caught</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.dateCaught")}</span>
               <p>{fish.caught_at}</p>
             </div>
           )}
           {fish.depth != null && (
             <div>
-              <span className="text-sm text-gray-500 dark:text-slate-400">Depth</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.depth")}</span>
               <p>{fish.depth} m</p>
             </div>
           )}
           {fish.weather && (
             <div>
-              <span className="text-sm text-gray-500 dark:text-slate-400">Weather</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.weather")}</span>
               <p>{fish.weather}</p>
             </div>
           )}
           {tackleName && (
             <div>
-              <span className="text-sm text-gray-500 dark:text-slate-400">Tackle</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.tackle")}</span>
               <p>{tackleName}</p>
             </div>
           )}
           {fish.additional_info && (
             <div>
-              <span className="text-sm text-gray-500 dark:text-slate-400">Additional Info</span>
+              <span className="text-sm text-gray-500 dark:text-slate-400">{t("fish.additionalInfo")}</span>
               <p>{fish.additional_info}</p>
             </div>
           )}
@@ -391,7 +393,7 @@ export default function FishDetail({ id }: { id: string }) {
             onClick={() => setEditing(true)}
             className="w-full bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
           >
-            Edit
+            {t("common.edit")}
           </button>
         </div>
       )}

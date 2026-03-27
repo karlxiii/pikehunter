@@ -20,8 +20,7 @@ export default async function CatchesPage() {
   return (
     <>
       <Header />
-      <main className="p-8">
-        <h2 className="text-2xl font-bold mb-6">My Catches</h2>
+      <main className="p-8 max-w-2xl mx-auto w-full">
         <CatchesList />
       </main>
     </>

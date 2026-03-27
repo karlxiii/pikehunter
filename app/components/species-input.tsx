@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { SPECIES } from "@/lib/species";
+import { useT } from "@/lib/i18n";
 
 export default function SpeciesInput({
   name,
@@ -18,6 +19,7 @@ export default function SpeciesInput({
   const [open, setOpen] = useState(false);
   const [filtered, setFiltered] = useState<string[]>([]);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const { t } = useT();
 
   useEffect(() => {
     if (value !== undefined) setInput(value);
@@ -58,7 +60,7 @@ export default function SpeciesInput({
         type="text"
         value={input}
         onChange={(e) => handleChange(e.target.value)}
-        placeholder="Type to search..."
+        placeholder={t("common.searchPlaceholder")}
         autoComplete="off"
         required
         className="w-full border dark:border-slate-600 rounded px-3 py-2 dark:bg-slate-700"

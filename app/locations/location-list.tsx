@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getLocations } from "@/app/actions";
+import { useT } from "@/lib/i18n";
 
 export default function LocationList() {
   const router = useRouter();
+  const { t } = useT();
   const [locations, setLocations] = useState<{ label: string; value: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,15 +21,17 @@ export default function LocationList() {
   }, []);
 
   if (loading) {
-    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">{t("common.loading")}</p>;
   }
 
   if (locations.length === 0) {
-    return <p className="text-gray-500 dark:text-slate-400">No locations yet. Add a fish with a location to see it here.</p>;
+    return <p className="text-gray-500 dark:text-slate-400">{t("locations.noLocations")}</p>;
   }
 
   return (
-    <ul className="space-y-2">
+    <>
+      <h2 className="text-xl font-bold mb-4">{t("locations.title")}</h2>
+      <ul className="space-y-2">
       {locations.map((location) => (
         <li
           key={location.value}
@@ -64,5 +68,6 @@ export default function LocationList() {
         </li>
       ))}
     </ul>
+    </>
   );
 }

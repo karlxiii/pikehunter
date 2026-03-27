@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getFishes, clearAllFishes } from "@/app/actions";
 import { useConfirm } from "@/app/components/confirm-modal";
+import { useT } from "@/lib/i18n";
 
 type Fish = {
   id: string;
@@ -20,6 +21,7 @@ type Fish = {
 export default function CatchesList() {
   const router = useRouter();
   const { confirm, modal } = useConfirm();
+  const { t } = useT();
   const [fishes, setFishes] = useState<Fish[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,9 +40,9 @@ export default function CatchesList() {
 
   async function handleClearAll() {
     const ok = await confirm({
-      title: "Clear all catches",
-      message: "Are you sure you want to delete all your catches? This cannot be undone.",
-      confirmLabel: "Delete All",
+      title: t("catches.clearTitle"),
+      message: t("catches.clearMessage"),
+      confirmLabel: t("catches.deleteAll"),
       destructive: true,
     });
     if (!ok) return;
@@ -51,13 +53,14 @@ export default function CatchesList() {
   }
 
   if (loading) {
-    return <p className="text-gray-500 dark:text-slate-400">Loading...</p>;
+    return <p className="text-gray-500 dark:text-slate-400">{t("common.loading")}</p>;
   }
 
   return (
-    <div className="max-w-md space-y-4">
+    <div className="max-w-md mx-auto space-y-4">
+      <h2 className="text-2xl font-bold">{t("catches.title")}</h2>
       {fishes.length === 0 ? (
-        <p className="text-gray-500 dark:text-slate-400">No catches yet.</p>
+        <p className="text-gray-500 dark:text-slate-400">{t("catches.noCatches")}</p>
       ) : (
         <ul className="space-y-2">
           {fishes.map((fish) => (
@@ -75,7 +78,7 @@ export default function CatchesList() {
               )}
               <div className="flex items-center justify-between">
                 <div>
-                  <strong>{fish.species ?? "Unknown species"}</strong>
+                  <strong>{fish.species ?? t("fish.unknownSpecies")}</strong>
                   {fish.weight != null && <span> — {fish.weight} g</span>}
                   {fish.length != null && <span>, {fish.length} cm</span>}
                 </div>
@@ -106,7 +109,7 @@ export default function CatchesList() {
           onClick={handleClearAll}
           className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
         >
-          Clear All
+          {t("catches.clearAll")}
         </button>
       )}
       {modal}
